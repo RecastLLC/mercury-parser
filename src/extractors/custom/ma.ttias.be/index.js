@@ -16,6 +16,8 @@ export const MaTtiasBeExtractor = {
   content: {
     selectors: [['.content']],
 
+    clean: ['div.comments'],
+
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
