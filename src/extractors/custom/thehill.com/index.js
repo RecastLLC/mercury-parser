@@ -6,16 +6,15 @@ export const theWillComExtractor = {
   },
 
   author: {
-    selectors: ['a.th-meta[data-ylk*="subsec:author"]'],
+    selectors: ['span.submitted-by', 'a.th-meta[data-ylk*="subsec:author"]'],
+    clean: ['span.submitted-date'],
   },
 
   // Engadget stories have publish dates, but the only representation of them on the page
   // is in a format like "2h ago". There are also these tags with blank values:
   // <meta class="swiftype" name="published_at" data-type="date" value="">
   date_published: {
-    selectors: [
-      // enter selectors
-    ],
+    selectors: ['span.submitted-date'],
   },
 
   dek: {
@@ -46,6 +45,6 @@ export const theWillComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['span.rollover-people-block'],
+    clean: ['span.rollover-people-block', ['data-embed-url'], 'div.rh-ear'],
   },
 };
