@@ -134,3 +134,4 @@ export * from './biorxiv.org';
 export * from './epaper.zeit.de';
 export * from './ma.ttias.be';
 export * from './www.engadget.com';
+export * from './thehill.com';
