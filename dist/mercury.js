@@ -2003,7 +2003,7 @@ var WiredExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.visually-hidden', 'figcaption img.photo', 'header.content-header', 'figure']
+    clean: ['.visually-hidden', 'figcaption img.photo', 'header.content-header', 'figure', 'aside']
   },
   date_published: {
     selectors: ['time.content-header__publish-date', ['meta[itemprop="datePublished"]', 'value']]

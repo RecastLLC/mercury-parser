@@ -38,6 +38,7 @@ export const WiredExtractor = {
       'figcaption img.photo',
       'header.content-header',
       'figure',
+      'aside',
     ],
   },
 
