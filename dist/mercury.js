@@ -3,9 +3,9 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var _regeneratorRuntime = _interopDefault(require('@babel/runtime-corejs2/regenerator'));
-var _objectSpread = _interopDefault(require('@babel/runtime-corejs2/helpers/objectSpread'));
 var _objectWithoutProperties = _interopDefault(require('@babel/runtime-corejs2/helpers/objectWithoutProperties'));
 var _asyncToGenerator = _interopDefault(require('@babel/runtime-corejs2/helpers/asyncToGenerator'));
+var _objectSpread = _interopDefault(require('@babel/runtime-corejs2/helpers/objectSpread'));
 var URL = _interopDefault(require('url'));
 var cheerio = _interopDefault(require('cheerio'));
 var TurndownService = _interopDefault(require('turndown'));
@@ -2003,7 +2003,7 @@ var WiredExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.visually-hidden', 'figcaption img.photo']
+    clean: ['.visually-hidden', 'figcaption img.photo', 'header.content-header', 'figure']
   },
   date_published: {
     selectors: ['time.content-header__publish-date', ['meta[itemprop="datePublished"]', 'value']]
@@ -7756,6 +7756,12 @@ var cleanStringNymag = function cleanStringNymag(text) {
   return text.replace(/(\r\n|\n|\\n|\r)/g, '').replace(/\s+/g, ' ').trim();
 };
 
+var cleanMailToWired = function cleanMailToWired(parse) {
+  return _objectSpread({}, parse, {
+    content: parse.content.replace('<p class="paywall"><em>Let us know what you think about this article. Submit a letter to the editor at</em> <a href="mailto:mail@wired.com"><em>mail@wired.com</em></a><em>.</em></p>', '')
+  });
+};
+
 var Mercury = {
   parse: function () {
     var _parse = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(url) {
@@ -7901,9 +7907,13 @@ var Mercury = {
                 result.content = $.text($(Extractor.domain === 'nymag.com' ? cleanStringNymag(result.content) : result.content));
               }
 
+              if (Extractor.domain === 'www.wired.com') {
+                result = cleanMailToWired(result);
+              }
+
               return _context.abrupt("return", _objectSpread({}, result, extendedTypes));
 
-            case 28:
+            case 29:
             case "end":
               return _context.stop();
           }

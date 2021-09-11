@@ -33,7 +33,12 @@ export const WiredExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.visually-hidden', 'figcaption img.photo'],
+    clean: [
+      '.visually-hidden',
+      'figcaption img.photo',
+      'header.content-header',
+      'figure',
+    ],
   },
 
   date_published: {

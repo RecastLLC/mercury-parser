@@ -9,7 +9,21 @@ import getExtractor from 'extractors/get-extractor';
 import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
-const cleanStringNymag = (text) => text.replace(/(\r\n|\n|\\n|\r)/g, '').replace(/\s+/g, ' ').trim()
+const cleanStringNymag = text =>
+  text
+    .replace(/(\r\n|\n|\\n|\r)/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const cleanMailToWired = parse => {
+  return {
+    ...parse,
+    content: parse.content.replace(
+      '<p class="paywall"><em>Let us know what you think about this article. Submit a letter to the editor at</em> <a href="mailto:mail@wired.com"><em>mail@wired.com</em></a><em>.</em></p>',
+      ''
+    ),
+  };
+};
 
 const Mercury = {
   async parse(url, { html, ...opts } = {}) {
@@ -108,7 +122,17 @@ const Mercury = {
       const turndownService = new TurndownService();
       result.content = turndownService.turndown(result.content);
     } else if (contentType === 'text') {
-      result.content = $.text($( Extractor.domain === 'nymag.com' ? cleanStringNymag(result.content) : result.content ))
+      result.content = $.text(
+        $(
+          Extractor.domain === 'nymag.com'
+            ? cleanStringNymag(result.content)
+            : result.content
+        )
+      );
+    }
+
+    if (Extractor.domain === 'www.wired.com') {
+      result = cleanMailToWired(result);
     }
 
     return { ...result, ...extendedTypes };
