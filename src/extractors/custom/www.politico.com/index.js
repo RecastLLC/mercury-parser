@@ -17,6 +17,7 @@ export const PoliticoExtractor = {
   content: {
     selectors: [
       // enter content selectors
+      '.page-content',
       '.story-main-content',
       '.content-group',
       '.story-core',
@@ -30,7 +31,7 @@ export const PoliticoExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['figcaption'],
+    clean: ['figcaption', '.story-meta'],
   },
 
   date_published: {

@@ -1995,7 +1995,7 @@ var WiredExtractor = {
     ]
   },
   content: {
-    selectors: ['article.article.main-content', 'article.content' // enter content selectors
+    selectors: ['article.article.main-content', 'article.content', 'div.article_chunks', 'div.grid--item' // enter content selectors
     ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2222,14 +2222,14 @@ var PoliticoExtractor = {
   },
   content: {
     selectors: [// enter content selectors
-    '.story-main-content', '.content-group', '.story-core', '.story-text'],
+    '.page-content', '.story-main-content', '.content-group', '.story-core', '.story-text'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['figcaption']
+    clean: ['figcaption', '.story-meta']
   },
   date_published: {
     selectors: [['.story-main-content .timestamp time[datetime]', 'datetime']]
