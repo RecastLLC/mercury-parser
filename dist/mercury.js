@@ -2107,7 +2107,7 @@ var BuzzfeedExtractor = {
     ]
   },
   content: {
-    selectors: [['.longform_custom_header_media', '#buzz_sub_buzz'], '#buzz_sub_buzz'],
+    selectors: ['div.buzz--long', 'div.buzz--list', 'p[class^="description"]', [('#buzz_sub_buzz')], '#buzz_sub_buzz'],
     defaultCleaner: false,
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2125,7 +2125,7 @@ var BuzzfeedExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print']
+    clean: ['div[class^="container"]', 'div[class^="actionBar"]', 'div[class^="adaptiveBylineContainer"]', '.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print']
   },
   date_published: {
     selectors: ['.buzz-datetime']
