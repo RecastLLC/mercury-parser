@@ -137,3 +137,4 @@ export * from './www.engadget.com';
 export * from './thehill.com';
 export * from './www.technologyreview.com';
 export * from './www.wsj.com';
+export * from './www.telegraph.co.uk';
