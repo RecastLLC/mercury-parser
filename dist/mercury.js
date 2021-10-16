@@ -1995,7 +1995,7 @@ var WiredExtractor = {
     ]
   },
   content: {
-    selectors: ['article.article.main-content', 'article.content', 'div.article_chunks', 'div.grid--item' // enter content selectors
+    selectors: ['article.article.main-content', 'article.content' // enter content selectors
     ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -5994,6 +5994,43 @@ var WwwTelegraphCoUkExtractor = {
   }
 };
 
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var PoliticoSimpleExtractor = {
+  domain: 'politico.com',
+  title: {
+    selectors: [// enter title selectors
+    ['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: ['.story-main-content .byline .vcard']
+  },
+  content: {
+    selectors: [// enter content selectors
+    '.page-content', '.story-main-content', '.content-group', '.story-core', '.story-text'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['figcaption', '.story-meta']
+  },
+  date_published: {
+    selectors: [['.story-main-content .timestamp time[datetime]', 'datetime']]
+  },
+  lead_image_url: {
+    selectors: [// enter lead_image_url selectors
+    ['meta[name="og:image"]', 'value']]
+  },
+  dek: {
+    selectors: []
+  },
+  next_page_url: null,
+  excerpt: null
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -6136,7 +6173,8 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   theWillComExtractor: theWillComExtractor,
   WwwTechnologyReviewComExtractor: WwwTechnologyReviewComExtractor,
   WwwWsjComExtractor: WwwWsjComExtractor,
-  WwwTelegraphCoUkExtractor: WwwTelegraphCoUkExtractor
+  WwwTelegraphCoUkExtractor: WwwTelegraphCoUkExtractor,
+  PoliticoSimpleExtractor: PoliticoSimpleExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
