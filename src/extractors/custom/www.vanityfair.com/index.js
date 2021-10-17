@@ -1,3 +1,10 @@
+const vanityFeature =
+    'are independently selected by our editors. However, when you buy something through our retail links, we may earn an affiliate commission.';
+
+const vanityCover = 'More Great Stories From Vanity Fair';
+
+let condFinishVanity = false;
+
 export const WwwVanityfairComExtractor = {
     domain: 'www.vanityfair.com',
 
@@ -40,7 +47,25 @@ export const WwwVanityfairComExtractor = {
 
         // Is there anything in the content you selected that needs transformed
         // before it's consumable content? E.g., unusual lazy loaded images
-        transforms: [],
+        transforms: {
+            '.paywall': $node => {
+                const $text = $node.text();
+                if (condFinishVanity) {
+                    $node.remove();
+                }
+
+                if ($text.includes(vanityFeature)) {
+                    $node.remove();
+                }
+
+                if ($text === vanityCover) {
+                    condFinishVanity = true;
+                    $node.remove();
+                }
+
+                return $node;
+            },
+        },
 
         // Is there anything that is in the result that shouldn't be?
         // The clean selectors will remove anything that matches from
