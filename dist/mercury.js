@@ -2690,12 +2690,15 @@ var WwwCnnComExtractor = {
           }
         }
       },
-      '.media__video--thumbnail': 'figure'
+      '.media__video--thumbnail': function media__videoThumbnail($node) {
+        $node.remove();
+      } // '.media__video--thumbnail': 'figure',
+
     },
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['h3', 'div.el__embedded.el__embedded--fullwidth', 'div.el__embedded.el__embedded--standard', 'div.el__embedded.el__embedded--expandable', 'div.el__embedded.el__embedded--fullstandardwidth', 'figure']
   }
 };
 
@@ -6031,6 +6034,9 @@ var PoliticoSimpleExtractor = {
   excerpt: null
 };
 
+var vanityFeature = 'are independently selected by our editors. However, when you buy something through our retail links, we may earn an affiliate commission.';
+var vanityCover = 'More Great Stories From Vanity Fair';
+var condFinishVanity = false;
 var WwwVanityfairComExtractor = {
   domain: 'www.vanityfair.com',
   title: {
@@ -6058,11 +6064,149 @@ var WwwVanityfairComExtractor = {
     ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: [],
+    transforms: {
+      '.paywall': function paywall($node) {
+        var $text = $node.text();
+
+        if (condFinishVanity) {
+          $node.remove();
+        }
+
+        if ($text.includes(vanityFeature)) {
+          $node.remove();
+        }
+
+        if ($text === vanityCover) {
+          condFinishVanity = true;
+          $node.remove();
+        }
+
+        return $node;
+      }
+    },
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: ['.visually-hidden', 'figcaption img.photo', 'header.content-header', 'figure', 'aside']
+  }
+};
+
+var EditionCnnComExtractor = {
+  domain: 'edition.cnn.com',
+  title: {
+    selectors: ['h1.pg-headline', 'h1']
+  },
+  author: {
+    selectors: ['.metadata__byline__author']
+  },
+  date_published: {
+    selectors: [['meta[name="pubdate"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: [// a more specific selector to grab the lead image and the body
+    ['.media__video--thumbnail', '.zn-body-text'], // a fallback for the above
+    '.zn-body-text', 'div[itemprop="articleBody"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      '.zn-body__paragraph, .el__leafmedia--sourced-paragraph': function znBody__paragraphEl__leafmediaSourcedParagraph($node) {
+        var $text = $node.html();
+
+        if ($text) {
+          return 'p';
+        }
+
+        return null;
+      },
+      // this transform cleans the short, all-link sections linking
+      // to related content but not marked as such in any way.
+      '.zn-body__paragraph': function znBody__paragraph($node) {
+        if ($node.has('a')) {
+          if ($node.text().trim() === $node.find('a').text().trim()) {
+            $node.remove();
+          }
+        }
+      },
+      '.media__video--thumbnail': function media__videoThumbnail($node) {
+        $node.remove();
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['h3', 'div.el__embedded.el__embedded--fullwidth', 'div.el__embedded.el__embedded--standard', 'div.el__embedded.el__embedded--expandable', 'div.el__embedded.el__embedded--fullstandardwidth', 'figure']
+  }
+};
+
+var WwwBbcCoUkExtractor = {
+  domain: 'www.bbc.co.uk',
+  title: {
+    selectors: [// enter title selectors
+    ]
+  },
+  author: {
+    selectors: [// enter author selectors
+    ]
+  },
+  date_published: {
+    selectors: [// enter selectors
+    ]
+  },
+  dek: {
+    selectors: [// enter selectors
+    ]
+  },
+  lead_image_url: {
+    selectors: [// enter selectors
+    ]
+  },
+  content: {
+    selectors: ['article' // enter content selectors
+    ],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['figure']
+  }
+};
+
+var WwwEspnComExtractor = {
+  domain: 'www.espn.com',
+  title: {
+    selectors: [// enter title selectors
+    ]
+  },
+  author: {
+    selectors: [// enter author selectors
+    ]
+  },
+  date_published: {
+    selectors: [// enter selectors
+    ]
+  },
+  dek: {
+    selectors: [// enter selectors
+    ]
+  },
+  lead_image_url: {
+    selectors: [// enter selectors
+    ]
+  },
+  content: {
+    selectors: ['div.article-body'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['figure', 'aside', 'div.article-meta']
   }
 };
 
@@ -6210,7 +6354,10 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwWsjComExtractor: WwwWsjComExtractor,
   WwwTelegraphCoUkExtractor: WwwTelegraphCoUkExtractor,
   PoliticoSimpleExtractor: PoliticoSimpleExtractor,
-  WwwVanityfairComExtractor: WwwVanityfairComExtractor
+  WwwVanityfairComExtractor: WwwVanityfairComExtractor,
+  EditionCnnComExtractor: EditionCnnComExtractor,
+  WwwBbcCoUkExtractor: WwwBbcCoUkExtractor,
+  WwwEspnComExtractor: WwwEspnComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
