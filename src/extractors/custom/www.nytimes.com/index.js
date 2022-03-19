@@ -45,6 +45,7 @@ export const NYTimesExtractor = {
       '.supplemental',
       '.nocontent',
       '.story-footer-links',
+      '#storyline-context-container',
     ],
   },
 

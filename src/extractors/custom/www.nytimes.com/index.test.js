@@ -143,4 +143,17 @@ describe('NYTimesExtractor', () => {
       'Nikki Haley to Resign as Trump’s Ambassador to the U.N.'
     );
   });
+
+  it('should clear card heading', async () => {
+    const html = fs.readFileSync(
+      './fixtures/www.nytimes.com/1571223287889.html'
+    );
+    const uri =
+      'https://www.nytimes.com/2022/03/07/world/europe/ukraine-putin-hate.html';
+
+    const { content } = await Mercury.parse(uri, { html });
+
+    const $ = cheerio.load(content);
+    assert.equal($('#storyline-context-container').length, 0);
+  });
 });
