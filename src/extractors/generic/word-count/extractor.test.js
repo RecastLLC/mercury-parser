@@ -18,4 +18,22 @@ describe('GenericWordCountExtractor', () => {
       assert.equal(wordCount, 12);
     });
   });
+
+  describe('extractWithPackage({ content })', () => {
+    it('counts words', () => {
+      const content = `
+        <div>
+          <p>One two three.</p>
+          <p>Four five six.</p>
+          <p>Seven eight nine.</p>
+          <p>Ten eleven twelve.</p>
+      `;
+
+      const wordCount = GenericWordCountExtractor.extractWitPackage({
+        content,
+      });
+
+      assert.equal(wordCount, 12);
+    });
+  });
 });

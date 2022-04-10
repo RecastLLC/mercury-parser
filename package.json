@@ -114,6 +114,7 @@
     "cheerio": "^0.22.0",
     "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
+    "html-word-count": "2.0.0",
     "iconv-lite": "0.5.0",
     "jquery": "^3.4.1",
     "moment": "^2.23.0",
