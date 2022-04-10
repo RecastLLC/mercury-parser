@@ -24,7 +24,7 @@ const GenericExtractor = {
   next_page_url: GenericNextPageUrlExtractor.extract,
   url_and_domain: GenericUrlExtractor.extract,
   excerpt: GenericExcerptExtractor.extract,
-  word_count: GenericWordCountExtractor.extract,
+  word_count: GenericWordCountExtractor.extractWitPackage,
   direction: ({ title }) => stringDirection.getDirection(title),
 
   extract(options) {

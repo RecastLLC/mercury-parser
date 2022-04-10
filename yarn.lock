@@ -4151,7 +4151,7 @@
   "resolved" "https://registry.npmjs.org/hat/-/hat-0.0.3.tgz"
   "version" "0.0.3"
 
-"he@1.2.0":
+"he@^1.0.0", "he@1.2.0":
   "integrity" "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw=="
   "resolved" "https://registry.npmjs.org/he/-/he-1.2.0.tgz"
   "version" "1.2.0"
@@ -4188,12 +4188,31 @@
   dependencies:
     "whatwg-encoding" "^1.0.1"
 
+"html-to-text@^3.2.0":
+  "integrity" "sha1-aptjxpm4hbt7qEsURr/mh2u/z7c="
+  "resolved" "https://registry.npmjs.org/html-to-text/-/html-to-text-3.3.0.tgz"
+  "version" "3.3.0"
+  dependencies:
+    "he" "^1.0.0"
+    "htmlparser2" "^3.9.2"
+    "optimist" "^0.6.1"
+    "underscore" "^1.8.3"
+    "underscore.string" "^3.2.3"
+
+"html-word-count@^2.0.0":
+  "integrity" "sha1-uCZBXDL7Bdo2TH+LQlpUoyeFioU="
+  "resolved" "https://registry.npmjs.org/html-word-count/-/html-word-count-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "html-to-text" "^3.2.0"
+    "wordcount" "^1.1.1"
+
 "htmlescape@^1.1.0":
   "integrity" "sha1-OgPtwiFLyjtmQko+eVk0lQnLA1E="
   "resolved" "https://registry.npmjs.org/htmlescape/-/htmlescape-1.1.1.tgz"
   "version" "1.1.1"
 
-"htmlparser2@^3.9.1":
+"htmlparser2@^3.9.1", "htmlparser2@^3.9.2":
   "integrity" "sha1-G9+HrMoPP55T+k/M6w9LTLsAszg="
   "resolved" "https://registry.npmjs.org/htmlparser2/-/htmlparser2-3.9.2.tgz"
   "version" "3.9.2"
@@ -6000,6 +6019,13 @@
   "integrity" "sha512-NcWuJFHDA8V3wkDgR/j4+gZx+YQwstPgfQDV8ndUeWWzta3dnDTBxpVzqS9lkmJAuV5YX35lmyojl6HO5JXAgw=="
   "resolved" "https://registry.npmjs.org/markdown-table/-/markdown-table-1.1.2.tgz"
   "version" "1.1.2"
+
+"match-words@^0.1.0":
+  "integrity" "sha1-3NMRnnSmpnvkMEylz5JlgOjhp68="
+  "resolved" "https://registry.npmjs.org/match-words/-/match-words-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "word-regex" "^0.1.0"
 
 "matcher@^1.0.0":
   "integrity" "sha512-+BmqxWIubKTRKNWx/ahnCkk3mG8m7OturVlqq6HiojGJTd5hVYbgZm6WzcYPCoB+KBT4Vd6R7WSRG2OADNaCjg=="
@@ -8514,6 +8540,11 @@
   dependencies:
     "readable-stream" "^3.0.0"
 
+"sprintf-js@^1.1.1":
+  "integrity" "sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug=="
+  "resolved" "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.1.2.tgz"
+  "version" "1.1.2"
+
 "sprintf-js@~1.0.2":
   "integrity" "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="
   "resolved" "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"
@@ -9144,6 +9175,19 @@
   "resolved" "https://registry.npmjs.org/umd/-/umd-3.0.1.tgz"
   "version" "3.0.1"
 
+"underscore.string@^3.2.3":
+  "integrity" "sha512-VoC83HWXmCrF6rgkyxS9GHv8W9Q5nhMKho+OadDJGzL2oDYbYEppBaCMH6pFlwLeqj2QS+hhkw2kpXkSdD1JxQ=="
+  "resolved" "https://registry.npmjs.org/underscore.string/-/underscore.string-3.3.6.tgz"
+  "version" "3.3.6"
+  dependencies:
+    "sprintf-js" "^1.1.1"
+    "util-deprecate" "^1.0.2"
+
+"underscore@^1.8.3":
+  "integrity" "sha512-ekY1NhRzq0B08g4bGuX4wd2jZx5GnKz6mKSqFL4nqBlfyMGiG10gDFhDTMEfYmDL6Jy0FUIZp7wiRB+0BP7J2g=="
+  "resolved" "https://registry.npmjs.org/underscore/-/underscore-1.13.2.tgz"
+  "version" "1.13.2"
+
 "unherit@^1.0.4":
   "integrity" "sha512-+XZuV691Cn4zHsK0vkKYwBEwB74T3IZIcxrgn2E4rKwTfFyI1zCh7X7grwh9Re08fdPlarIdyWgI8aVB3F5A5g=="
   "resolved" "https://registry.npmjs.org/unherit/-/unherit-1.1.1.tgz"
@@ -9377,7 +9421,7 @@
     "lru-cache" "4.1.x"
     "tmp" "0.0.x"
 
-"util-deprecate@^1.0.1", "util-deprecate@~1.0.1":
+"util-deprecate@^1.0.1", "util-deprecate@^1.0.2", "util-deprecate@~1.0.1":
   "integrity" "sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8="
   "resolved" "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   "version" "1.0.2"
@@ -9595,6 +9639,18 @@
   "version" "3.1.0"
   dependencies:
     "execa" "^0.10.0"
+
+"word-regex@^0.1.0":
+  "integrity" "sha1-o7x/LSIs5Kk8JGw+9pRY9h9RFjk="
+  "resolved" "https://registry.npmjs.org/word-regex/-/word-regex-0.1.2.tgz"
+  "version" "0.1.2"
+
+"wordcount@^1.1.1":
+  "integrity" "sha1-5y2ngzkE2HChVMnvR+1fPnmXz1c="
+  "resolved" "https://registry.npmjs.org/wordcount/-/wordcount-1.1.1.tgz"
+  "version" "1.1.1"
+  dependencies:
+    "match-words" "^0.1.0"
 
 "wordwrap@^1.0.0", "wordwrap@~1.0.0":
   "integrity" "sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus="
